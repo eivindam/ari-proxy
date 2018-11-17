@@ -6,7 +6,7 @@ import (
 	"github.com/CyCoreSystems/ari/rid"
 )
 
-type bridge struct {
+type Bridge struct {
 	c *Client
 }
 
