@@ -28,7 +28,7 @@ func (a *asterisk) Modules() ari.Modules {
 func (a *asterisk) Info(key *ari.Key) (*ari.AsteriskInfo, error) {
 	resp, err := a.c.dataRequest(&proxy.Request{
 		Kind: "AsteriskInfo",
-		Key:  key,
+		ari.Key:  key,
 	})
 	if err != nil {
 		return nil, err
@@ -43,7 +43,7 @@ func (a *asterisk) Variables() ari.AsteriskVariables {
 func (a *asteriskVariables) Get(key *ari.Key) (ret string, err error) {
 	data, err := a.c.dataRequest(&proxy.Request{
 		Kind: "AsteriskVariableGet",
-		Key:  key,
+		ari.Key:  key,
 	})
 	if err != nil {
 		return "", err
@@ -54,7 +54,7 @@ func (a *asteriskVariables) Get(key *ari.Key) (ret string, err error) {
 func (a *asteriskVariables) Set(key *ari.Key, val string) (err error) {
 	return a.c.commandRequest(&proxy.Request{
 		Kind: "AsteriskVariableSet",
-		Key:  key,
+		ari.Key:  key,
 		AsteriskVariableSet: &proxy.AsteriskVariableSet{
 			Value: val,
 		},
