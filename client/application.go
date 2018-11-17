@@ -12,7 +12,7 @@ type application struct {
 func (a *application) List(filter *ari.Key) ([]*ari.Key, error) {
 	return a.c.listRequest(&proxy.Request{
 		Kind: "ApplicationList",
-		Key:  filter,
+		ari.Key:  filter,
 	})
 }
 
