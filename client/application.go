@@ -9,17 +9,17 @@ type application struct {
 	c *Client
 }
 
-func (a *application) List(filter *ari.Key) ([]*ari.Key, error) {
+func (a *application) List(filter *ari.Key) ([]*Key, error) {
 	return a.c.listRequest(&proxy.Request{
 		Kind: "ApplicationList",
-		ari.Key:  filter,
+		Key:  filter,
 	})
 }
 
 func (a *application) Data(key *ari.Key) (*ari.ApplicationData, error) {
 	ret, err := a.c.dataRequest(&proxy.Request{
 		Kind: "ApplicationData",
-		ari.Key:  key,
+		Key:  key,
 	})
 	if err != nil {
 		return nil, err
@@ -30,7 +30,7 @@ func (a *application) Data(key *ari.Key) (*ari.ApplicationData, error) {
 func (a *application) Get(key *ari.Key) *ari.ApplicationHandle {
 	k, err := a.c.getRequest(&proxy.Request{
 		Kind: "ApplicationGet",
-		ari.Key:  key,
+		Key:  key,
 	})
 	if err != nil {
 		a.c.log.Warn("failed to make data request for application", "error", err)
@@ -42,7 +42,7 @@ func (a *application) Get(key *ari.Key) *ari.ApplicationHandle {
 func (a *application) Subscribe(key *ari.Key, eventSource string) (err error) {
 	return a.c.commandRequest(&proxy.Request{
 		Kind: "ApplicationSubscribe",
-		ari.Key:  key,
+		Key:  key,
 		ApplicationSubscribe: &proxy.ApplicationSubscribe{
 			EventSource: eventSource,
 		},
@@ -52,7 +52,7 @@ func (a *application) Subscribe(key *ari.Key, eventSource string) (err error) {
 func (a *application) Unsubscribe(key *ari.Key, eventSource string) (err error) {
 	return a.c.commandRequest(&proxy.Request{
 		Kind: "ApplicationUnsubscribe",
-		ari.Key:  key,
+		Key:  key,
 		ApplicationSubscribe: &proxy.ApplicationSubscribe{
 			EventSource: eventSource,
 		},
