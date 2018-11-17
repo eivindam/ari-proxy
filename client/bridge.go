@@ -10,7 +10,7 @@ type Bridge struct {
 	c *Client
 }
 
-func (b *bridge) Create(key *ari.Key, btype, name string) (*ari.BridgeHandle, error) {
+func (b *Bridge) Create(key *ari.Key, btype, name string) (*ari.BridgeHandle, error) {
 	k, err := b.c.createRequest(&proxy.Request{
 		Kind: "BridgeCreate",
 		Key:  key,
@@ -25,7 +25,7 @@ func (b *bridge) Create(key *ari.Key, btype, name string) (*ari.BridgeHandle, er
 	return ari.NewBridgeHandle(k, b, nil), nil
 }
 
-func (b *bridge) StageCreate(key *ari.Key, btype, name string) (*ari.BridgeHandle, error) {
+func (b *Bridge) StageCreate(key *ari.Key, btype, name string) (*ari.BridgeHandle, error) {
 	k, err := b.c.createRequest(&proxy.Request{
 		Kind: "BridgeStageCreate",
 		Key:  key,
@@ -43,7 +43,7 @@ func (b *bridge) StageCreate(key *ari.Key, btype, name string) (*ari.BridgeHandl
 	}), nil
 }
 
-func (b *bridge) Get(key *ari.Key) *ari.BridgeHandle {
+func (b *Bridge) Get(key *ari.Key) *ari.BridgeHandle {
 	k, err := b.c.getRequest(&proxy.Request{
 		Kind: "BridgeGet",
 		Key:  key,
@@ -55,7 +55,7 @@ func (b *bridge) Get(key *ari.Key) *ari.BridgeHandle {
 	return ari.NewBridgeHandle(k, b, nil)
 }
 
-func (b *bridge) List(filter *ari.Key) ([]*ari.Key, error) {
+func (b *Bridge) List(filter *ari.Key) ([]*ari.Key, error) {
 	return b.c.listRequest(&proxy.Request{
 		Kind: "BridgeList",
 		Key:  filter,
@@ -73,7 +73,7 @@ func (b *bridge) Data(key *ari.Key) (*ari.BridgeData, error) {
 	return resp.Bridge, nil
 }
 
-func (b *bridge) AddChannel(key *ari.Key, channelID string) error {
+func (b *Bridge) AddChannel(key *ari.Key, channelID string) error {
 	return b.c.commandRequest(&proxy.Request{
 		Kind: "BridgeAddChannel",
 		Key:  key,
@@ -83,7 +83,7 @@ func (b *bridge) AddChannel(key *ari.Key, channelID string) error {
 	})
 }
 
-func (b *bridge) RemoveChannel(key *ari.Key, channelID string) error {
+func (b *Bridge) RemoveChannel(key *ari.Key, channelID string) error {
 	return b.c.commandRequest(&proxy.Request{
 		Kind: "BridgeRemoveChannel",
 		Key:  key,
@@ -93,14 +93,14 @@ func (b *bridge) RemoveChannel(key *ari.Key, channelID string) error {
 	})
 }
 
-func (b *bridge) Delete(key *ari.Key) error {
+func (b *Bridge) Delete(key *ari.Key) error {
 	return b.c.commandRequest(&proxy.Request{
 		Kind: "BridgeDelete",
 		Key:  key,
 	})
 }
 
-func (b *bridge) MOH(key *ari.Key, class string) error {
+func (b *Bridge) MOH(key *ari.Key, class string) error {
 	return b.c.commandRequest(&proxy.Request{
 		Kind: "BridgeMOH",
 		Key:  key,
@@ -110,14 +110,14 @@ func (b *bridge) MOH(key *ari.Key, class string) error {
 	})
 }
 
-func (b *bridge) StopMOH(key *ari.Key) error {
+func (b *Bridge) StopMOH(key *ari.Key) error {
 	return b.c.commandRequest(&proxy.Request{
 		Kind: "BridgeStopMOH",
 		Key:  key,
 	})
 }
 
-func (b *bridge) Play(key *ari.Key, id string, uri string) (*ari.PlaybackHandle, error) {
+func (b *Bridge) Play(key *ari.Key, id string, uri string) (*ari.PlaybackHandle, error) {
 	k, err := b.c.createRequest(&proxy.Request{
 		Kind: "BridgePlay",
 		Key:  key,
@@ -132,7 +132,7 @@ func (b *bridge) Play(key *ari.Key, id string, uri string) (*ari.PlaybackHandle,
 	return ari.NewPlaybackHandle(k.New(ari.PlaybackKey, id), b.c.Playback(), nil), nil
 }
 
-func (b *bridge) StagePlay(key *ari.Key, id string, uri string) (*ari.PlaybackHandle, error) {
+func (b *Bridge) StagePlay(key *ari.Key, id string, uri string) (*ari.PlaybackHandle, error) {
 	k, err := b.c.getRequest(&proxy.Request{
 		Kind: "BridgeStagePlay",
 		Key:  key,
@@ -151,7 +151,7 @@ func (b *bridge) StagePlay(key *ari.Key, id string, uri string) (*ari.PlaybackHa
 	}), nil
 }
 
-func (b *bridge) Record(key *ari.Key, name string, opts *ari.RecordingOptions) (*ari.LiveRecordingHandle, error) {
+func (b *Bridge) Record(key *ari.Key, name string, opts *ari.RecordingOptions) (*ari.LiveRecordingHandle, error) {
 	if opts == nil {
 		opts = &ari.RecordingOptions{}
 	}
@@ -173,7 +173,7 @@ func (b *bridge) Record(key *ari.Key, name string, opts *ari.RecordingOptions) (
 	return ari.NewLiveRecordingHandle(k.New(ari.LiveRecordingKey, name), b.c.LiveRecording(), nil), nil
 }
 
-func (b *bridge) StageRecord(key *ari.Key, name string, opts *ari.RecordingOptions) (*ari.LiveRecordingHandle, error) {
+func (b *Bridge) StageRecord(key *ari.Key, name string, opts *ari.RecordingOptions) (*ari.LiveRecordingHandle, error) {
 	if opts == nil {
 		opts = &ari.RecordingOptions{}
 	}
@@ -199,7 +199,7 @@ func (b *bridge) StageRecord(key *ari.Key, name string, opts *ari.RecordingOptio
 	}), nil
 }
 
-func (b *bridge) Subscribe(key *ari.Key, n ...string) ari.Subscription {
+func (b *Bridge) Subscribe(key *ari.Key, n ...string) ari.Subscription {
 	err := b.c.commandRequest(&proxy.Request{
 		Kind: "BridgeSubscribe",
 		Key:  key,
