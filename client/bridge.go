@@ -62,7 +62,7 @@ func (b *Bridge) List(filter *ari.Key) ([]*ari.Key, error) {
 	})
 }
 
-func (b *bridge) Data(key *ari.Key) (*ari.BridgeData, error) {
+func (b *Bridge) Data(key *ari.Key) (*ari.BridgeData, error) {
 	resp, err := b.c.dataRequest(&proxy.Request{
 		Kind: "BridgeData",
 		Key:  key,
