@@ -9,7 +9,7 @@ type application struct {
 	c *Client
 }
 
-func (a *application) List(filter *ari.Key) ([]*Key, error) {
+func (a *application) List(filter *ari.Key) ([]*ari.Key, error) {
 	return a.c.listRequest(&proxy.Request{
 		Kind: "ApplicationList",
 		Key:  filter,
